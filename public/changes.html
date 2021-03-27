@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
+    <title>Degenesis CharGen!</title>
+    <script src="js/character-data.js"></script>
+    <script src="js/character.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="/">Degenesis CharGen!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsing"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-collapsing">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">¿Qué es esto?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/DavSanchez/degenesis-chargen">GitHub</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/changes">Changelog</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <hr class="my-4">
+
+    <div class="container">
+        <h5>1.1.5 — 27-03-21</h5>
+        <p>Se ha cambiado el <em>backend</em> que usaba la aplicación (de Node.js a Scotty, un <em>framework</em> para Haskell). No debería notarse ninguna diferencia.</b>
+        </p>
+        <h5>1.1.4 — 27-08-18</h5>
+        <p>Los campos de altura, peso y dinares/LC ahora aceptan valores decimales. También se ha quitado la D que
+            seguía
+            los valores numéricos de los trasfondos.</b>
+        </p>
+        <h5>1.1.3 — 23-08-18</h5>
+        <p>Las tablas de protección no se veían muy bien en Chrome y Safari para escritorio, así que las he
+            retocado.</b>
+        </p>
+        <h5>1.1.2 — 21-08-18</h5>
+        <p>Corregido un error en la aceptación del patrón de entrada para la fórmula del daño y su posterior
+            cálculo.</b>
+        </p>
+        <h5>1.1.1 — 20-08-18</h5>
+        <p>Ahora el daño se calcula correctamente si se utiliza la sintaxis de los libros (por ejemplo: 2 + F/2).
+            Procuren
+            avisar si ven fallos en esto, ya que es importante</b>
+        </p>
+        <h5>1.1.0 — 20-08-18</h5>
+        <p>Añadidos los apartados de <b>armas</b> y <b>protecciones</b> para calcular los <b>ataques</b>, <b>defensas
+                activas</b>
+            y <b>armadura</b>. Por lo pronto, a falta de corregir posibles errores, podemos dar la funcionalidad básica
+            por
+            terminada. Lo siguiente sería probar mejores opciones de alojamiento como puede ser GitHub Pages, ya que
+            esto
+            no deja de ser en su mayoría contenido web estático, y algunas cosillas de programación interna. ¡A
+            disfrutar!
+            <b>¡2<sup>16</sup>!</b>
+        </p>
+        <h5>1.0.1 — 19-08-18</h5>
+        <p>Ahora los <b>trasfondos</b> y los <b>potenciales</b> no aparecen en el resultado si no se ha añadido ninguno.
+            Las <b>habilidades</b>
+            siguen apareciendo en blanco para advertir sobre esto al usuario, ya que entiendo que alguna habilidad
+            querrán ;)
+        </p>
+    </div>
+    <hr class="my-4">
+
+    <!-- Scripts needed for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

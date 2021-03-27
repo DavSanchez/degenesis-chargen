@@ -14,18 +14,21 @@ category:            rpg, web
 build-type:          Simple
 extra-doc-files:     README.md
                      CHANGELOG.md
-tested-with:         GHC == 8.8.3
+tested-with:         GHC == 8.10.4
 
 source-repository head
   type:                git
   location:            https://github.com/DavSanchez/degenesis-chargen.git
 
 common common-options
-  build-depends:       base ^>= 4.13.0.0
-                     , relude
+  build-depends:       base ^>= 4.14.1.0
+                     , relude ^>= 1.0.0.1
   
   mixins:              base hiding (Prelude)
                      , relude (Relude as Prelude)
+                     , relude
+
+  default-extensions: OverloadedStrings
   
   ghc-options:         -Wall
                        -Wcompat
@@ -47,6 +50,9 @@ common common-options
 library
   import:              common-options
   hs-source-dirs:      src
+  build-depends:       scotty
+                     , wai-extra
+                     , wai-middleware-static
   exposed-modules:     DegenesisChargen
 
 executable degenesis-chargen

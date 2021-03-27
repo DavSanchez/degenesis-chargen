@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
+    <title>Degenesis CharGen!</title>
+    <script src="js/character-data.js"></script>
+    <script src="js/character.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="#main-charsheet">Degenesis CharGen!</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item result-button">
+                <a class="nav-link" href="#stats-area">Ir al resultado</a>
+            </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsing"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-collapsing">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">¿Qué es esto?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/DavSanchez/degenesis-chargen">GitHub</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/changes">Changelog</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <hr class="my-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-7">
+                <form id="charsheet-form">
+                    <div class="container-fluid form-group" id="main-charsheet">
+                        <!-- Name, age, culture, concept, cult-->
+                        <div id="char-header">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <h1>PERSONAJE</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label class="header-label" for="nombre">NOMBRE:</label>
+                                    <input type="text" class="form-control form-control-sm text-uppercase" id="nombre">
+                                    <label class="header-label" for="edad">EDAD:</label>
+                                    <input type="number" min="0" class="form-control form-control-sm text-uppercase"
+                                        id="edad">
+                                    <label class="header-label" for="rango">RANGO:</label>
+                                    <input type="text" class="form-control form-control-sm text-uppercase" id="rango">
+                                    <label class="header-label" for="experiencia">EXPERIENCIA:</label>
+                                    <input type="number" min="0" class="form-control form-control-sm text-uppercase"
+                                        id="experiencia">
+                                </div>
+                                <div class="col-lg-4">
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="header-label" for="sexo">SEXO:</label>
+                                    <input type="text" class="form-control form-control-sm text-uppercase" id="sexo">
+                                    <label class="header-label" for="altura">ALTURA:</label>
+                                    <input type="number" step="0.01" min="0"
+                                        class="form-control form-control-sm text-uppercase" id="altura">
+                                    <label class="header-label" for="experiencia">PESO:</label>
+                                    <input type="number" step="0.01" min="0"
+                                        class="form-control form-control-sm text-uppercase" id="peso">
+                                    <label class="header-label" for="dinares-lc">DINARES/LC:</label>
+                                    <input type="number" step="0.01" min="0"
+                                        class="form-control form-control-sm text-uppercase" id="dinares-lc">
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-lg-4">
+                                    <p>
+                                    <h5><label class="CCC" for="cultura">CULTURA</label></h5>
+                                    </p>
+                                    <p>
+                                        <select class="form-control form-control-sm custom-select custom-select-sm"
+                                            id="cultura">
+                                        </select>
+                                    </p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p>
+                                    <h5><label class="CCC" for="concepto">CONCEPTO</label></h5>
+                                    </p>
+                                    <p>
+                                        <select class="form-control form-control-sm custom-select custom-select-sm"
+                                            id="concepto">
+                                        </select>
+                                    </p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p>
+                                    <h5><label class="CCC" for="colectivo">COLECTIVO</label></h5>
+                                    </p>
+                                    <p>
+                                        <select class="form-control form-control-sm custom-select custom-select-sm"
+                                            id="colectivo">
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <!-- Body, Agility, Charisma -->
+                        <div id="attributes-skills">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p><label for="faith-willpower">ELIGE FE O VOLUNTAD:</label>
+                                        <select class="form-control form-control-sm custom-select custom-select-sm"
+                                            id="faith-willpower" onchange="checkAttributeSelectors(this)">
+                                            <option value="faith">FE</option>
+                                            <option value="willpower">VOLUNTAD</option>
+                                        </select>
+                                    </p>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p><label for="focus-primal">ELIGE CONCENTRACIÓN O PRIMORDIAL:</label>
+                                        <select class="form-control form-control-sm custom-select custom-select-sm"
+                                            id="focus-primal" onchange="checkAttributeSelectors(this)">
+                                            <option value="focus">CONCENTRACIÓN</option>
+                                            <option value="primal">PRIMORDIAL</option>
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row" id="attributes-1">
+                                <div class="col-lg-4" id="attr-body">
+                                    <table class="table table-hover table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col" class="col-8">CUERPO</th>
+                                                <th scope="col" class="col-4">
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="body">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">ATLETISMO</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="athletics">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">CUERPO A CUERPO</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="melee">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">FUERZA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="force">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">PELEA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="brawl">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">RESISTENCIA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="toughness">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">VIGOR</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="stamina">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-4" id="attr-agility">
+                                    <table class="table table-hover table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col" class="col-8">AGILIDAD</th>
+                                                <th scope="col" class="col-4">
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="agility">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">CONDUCIR</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="navigation">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">DESTREZA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="dexterity">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">FABRICAR</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="crafting">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">MOVILIDAD</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="mobility">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">PROYECTILES</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="projectiles">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">SIGILO</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="stealth">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-4" id="attr-charisma">
+                                    <table class="table table-hover table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col" class="col-8">CARISMA</th>
+                                                <th scope="col" class="col-4">
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="charisma">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">ARTE</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="arts">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">CONDUCTA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="conduct">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">EXPRESIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="expression">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">LIDERAZGO</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="leadership">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">NEGOCIACIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="negotiation">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">SEDUCCIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="seduction">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Intellect, Psyche, Instinct -->
+                            <div class="row" id="attributes-2">
+                                <div class="col-lg-4" id="attr-intellect">
+                                    <table class="table table-hover table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col" class="col-8">INTELECTO</th>
+                                                <th scope="col" class="col-4">
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="intellect">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">ARTEFACTOS</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="artifactLore">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" id="focus-text">CONCENTRACIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="focus">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">CIENCIA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="science">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">INGENIERÍA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="engineering">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">LEYENDAS</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="legends">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">MEDICINA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="medicine">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                </div>
+                                <div class="col-lg-4" id="attr-psyche">
+                                    <table class="table table-hover table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col" class="col-8">PSIQUE</th>
+                                                <th scope="col" class="col-4">
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="psyche">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">ASTUCIA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="cunning">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">DOMINACIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="domination">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">ENGAÑO</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="deception">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" id="faith-text">FE</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="faith">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">REACCIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="reaction">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" id="willpower-text">VOLUNTAD</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="willpower">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                </div>
+                                <div class="col-lg-4" id="attr-instinct">
+                                    <table class="table table-hover table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col" class="col-8">INSTINTO</th>
+                                                <th scope="col" class="col-4">
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="instinct">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">DOMA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="taming">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">EMPATÍA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="empathy">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">ORIENTACIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="orienteering">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">PERCEPCIÓN</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="perception">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" id="primal-text">PRIMORDIAL</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="primal">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">SUPERVIVENCIA</th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                        id="survival">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <!-- Origins, Ego, Wounds, Spore, Potentials -->
+                        <div class="row" id="origins-condition-potentials">
+                            <div class="col-lg-4" id="origins">
+                                <table class="table table-hover table-sm">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" class="col-8">ORÍGENES</th>
+                                            <th scope="col" class="col-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">ALIADOS</th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="allies">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">AUTORIDAD</th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="authority">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">RED</th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="network">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">RENOMBRE</th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="renown">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">RECURSOS</th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="resources">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">SECRETOS</th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="secrets">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-4 text-center" id="condition">
+                                <table class="table table-hover table-sm">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th scope="col">EGO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="text-center font-weight-bold" id="ego">--</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-hover table-sm">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th scope="col" class="col-12">INFESTACIÓN DE ESPORAS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="text-center font-weight-bold" id="sporeInfestations">
+                                                    <b>--</b></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-hover table-sm">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th scope="col" class="col-12">HERIDAS SUPERFICIALES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="text-center font-weight-bold" id="fleshwounds">--</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-hover table-sm">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th scope="col" class="col-12">TRAUMA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="text-center font-weight-bold" id="trauma">--</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-4 text-uppercase" id="potentials">
+                                <table class="table table-hover table-sm">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" class="col-8">POTENCIALES</th>
+                                            <th scope="col" class="col-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <input class="form-control form-control-sm text-uppercase" type="text"
+                                                    placeholder="POTENCIAL..." id="pot1">
+                                            </th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="pot1-level">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <input class="form-control form-control-sm text-uppercase" type="text"
+                                                    placeholder="POTENCIAL..." id="pot2">
+                                            </th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="pot2-level">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <input class="form-control form-control-sm text-uppercase" type="text"
+                                                    placeholder="POTENCIAL..." id="pot3">
+                                            </th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="pot3-level">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <input class="form-control form-control-sm text-uppercase" type="text"
+                                                    placeholder="POTENCIAL..." id="pot4">
+                                            </th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="pot4-level">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <input class="form-control form-control-sm text-uppercase" type="text"
+                                                    placeholder="POTENCIAL..." id="pot5">
+                                            </th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="pot5-level">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <input class="form-control form-control-sm text-uppercase" type="text"
+                                                    placeholder="POTENCIAL..." id="pot6">
+                                            </th>
+                                            <td>
+                                                <select
+                                                    class="form-control form-control-sm numeric custom-select custom-select-sm"
+                                                    id="pot6-level">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <!-- Equipment -->
+                        <div id="equipment">
+                            <div class="row" id="weapons">
+                                <div class="col text-uppercase">
+                                    <table class="table table-hover table-sm table-responsive-md">
+                                        <caption class="small">
+                                            * Se ha de escribir como en el juego para que se haga el cálculo. Ej.: 2 +
+                                            F/2
+                                            <br> Si el daño es en Ego, Trauma o por desencadenantes indicarlo en
+                                            Propiedades
+                                        </caption>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="col-3">
+                                                    Arma
+                                                </th>
+                                                <th scope="col" class="col-1">
+                                                    Habilidad
+                                                </th>
+                                                <th scope="col" class="col-1">
+                                                    Manejo
+                                                </th>
+                                                <th scope="col" class="col-1">
+                                                    Distancia
+                                                </th>
+                                                <th scope="col" class="col-2">
+                                                    Daño*
+                                                </th>
+                                                <th scope="col" class="col-1">
+                                                    Cargas
+                                                </th>
+                                                <th scope="col" class="col-3">
+                                                    Propiedades
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <input class="form-control form-control-sm text-uppercase"
+                                                        type="text" placeholder="Arma 1" id="weapon1-name">
+                                                </th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm custom-select custom-select-sm"
+                                                        id="weapon1-attack">
+                                                        <option value="brawl">PELEA</option>
+                                                        <option value="melee">CUERPO A CUERPO</option>
+                                                        <option value="projectiles">PROYECTILES</option>
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon1-handling">
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon1-distance">
+                                                </td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text"
+                                                        pattern="^[fF]{1}\s*[\-\+\*\/]{1}\s*\d+$|^\d+\s*[\-\+\*\/]{1}\s*[fF]{1}\s*$|^\d+\s*$|^[fF]{1}$|^\d+\s*[\-\+\*\/]{1}\s*[fF]{1}\s*[\-\+\*\/]{1}\d+$"
+                                                        id="weapon1-damage"></td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon1-charges"></td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text" id="weapon1-properties"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <input class="form-control form-control-sm text-uppercase"
+                                                        type="text" placeholder="Arma 2" id="weapon2-name">
+                                                </th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm custom-select custom-select-sm"
+                                                        id="weapon2-attack">
+                                                        <option value="brawl">PELEA</option>
+                                                        <option value="melee">CUERPO A CUERPO</option>
+                                                        <option value="projectiles">PROYECTILES</option>
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon2-handling">
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon2-distance">
+                                                </td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text"
+                                                        pattern="^[fF]{1}\s*[\-\+\*\/]{1}\s*\d+$|^\d+\s*[\-\+\*\/]{1}\s*[fF]{1}\s*$|^\d+\s*$|^[fF]{1}$|^\d+\s*[\-\+\*\/]{1}\s*[fF]{1}\s*[\-\+\*\/]{1}\d+$"
+                                                        id="weapon2-damage"></td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon2-charges"></td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text" id="weapon2-properties"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <input class="form-control form-control-sm text-uppercase"
+                                                        type="text" placeholder="Arma 3" id="weapon3-name">
+                                                </th>
+                                                <td>
+                                                    <select
+                                                        class="form-control form-control-sm custom-select custom-select-sm"
+                                                        id="weapon3-attack">
+                                                        <option value="brawl">PELEA</option>
+                                                        <option value="melee">CUERPO A CUERPO</option>
+                                                        <option value="projectiles">PROYECTILES</option>
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon3-handling">
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon3-distance">
+                                                </td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text"
+                                                        pattern="^[fF]{1}\s*[\-\+\*\/]{1}\s*\d+$|^\d+\s*[\-\+\*\/]{1}\s*[fF]{1}\s*$|^\d+\s*$|^[fF]{1}$|^\d+\s*[\-\+\*\/]{1}\s*[fF]{1}\s*[\-\+\*\/]{1}\d+$"
+                                                        id="weapon3-damage"></td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="weapon3-charges"></td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text" id="weapon3-properties"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row" id="armor">
+                                <div class="col text-uppercase">
+                                    <table class="table table-hover table-sm table-responsive-md" id="armor-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="col-4 armor-header" id="armor-table-prot">
+                                                    Protección</th>
+                                                <th scope="col" class="col-2 numeric" id="armor-table-armor">Valor</th>
+                                                <th scope="col" class="col-2 numeric" id="armor-table-def">Defensa</th>
+                                                <th scope="col" class="col-4" id="armor-table-props">Propiedades</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <input class="form-control form-control-sm text-uppercase"
+                                                        type="text" placeholder="Protección 1" id="protection1-name">
+                                                </th>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="protection1-armor">
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="protection1-defense">
+                                                </td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text" id="protection1-properties"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <input class="form-control form-control-sm text-uppercase"
+                                                        type="text" placeholder="Protección 2" id="protection2-name">
+                                                </th>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="protection2-armor">
+                                                </td>
+                                                <td><input class="form-control form-control-sm" type="number"
+                                                        id="protection2-defense">
+                                                </td>
+                                                <td><input class="form-control form-control-sm text-uppercase"
+                                                        type="text" id="protection2-properties"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-5">
+                <div id="output-area">
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <hr class="my-4">
+        </div>
+    </div>
+    <script src="js/main.js" type="text/javascript"></script>
+    <!-- Scripts needed for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

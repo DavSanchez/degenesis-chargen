@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "./app"
+      component: "exe:degenesis-chargen"
+    - path: "./src"
+      component: "lib:degenesis-chargen"
+    - path: "./test"
+      component: "test:degenesis-chargen-test"
+    - path: "./benchmark"
+      component: "benchmark:degenesis-chargen-benchmark"

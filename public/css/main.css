@@ -1,0 +1,53 @@
+/* for debug */
+/* div {
+  border: 1px solid black;
+} */
+
+/* begin styling */
+select.form-control.numeric {
+  width: max-content;
+}
+
+/* TABLE ADJUSTMENTS FOR SAFARI AND CHROME */
+#armor-table-prot, #armor-table-props {
+  width: 33%;
+}
+#armor-table-armor, #armor-table-def {
+  width: 16.5%;
+}
+/* END TABLE ADJUSTMENTS */
+
+#text-area {
+  width: 100%;
+  height: 50%;
+}
+
+label.header-label {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+label.CCC {
+  margin-top: 1rem;
+}
+
+#output-area {
+  position: static;
+}
+
+.result-button {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  #output-area {
+    position: fixed;
+  }
+}
+
+/* The one in the navbar */
+@media (max-width: 1200px) {
+  .result-button {
+    display: inline-block;
+  }
+}
