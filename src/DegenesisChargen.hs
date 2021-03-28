@@ -15,7 +15,7 @@ import Web.Scotty
 import Prelude hiding (get)
 
 runChargenServer :: IO ()
-runChargenServer = scotty 8080 $ do
+runChargenServer = scotty 80 $ do
   middleware logStdoutDev
   middleware $ staticPolicy (addBase "public")
   get "/" $ file "public/index.html"
