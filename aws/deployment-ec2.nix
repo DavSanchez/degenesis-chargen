@@ -14,6 +14,7 @@ in
       resources.ec2SecurityGroups."http"
       resources.ec2SecurityGroups."ssh"
     ];
+    deployment.ec2.ebsInitialRootDiskSize = 7;
   };
 
   resources.ec2KeyPairs.degenesis-chargen-keys =
