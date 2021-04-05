@@ -19,5 +19,5 @@ runChargenServer = scotty 80 $ do
   middleware logStdoutDev
   middleware $ staticPolicy (addBase "src/public")
   get "/" $ file "src/public/index.html"
-  get "/about" $ file "src/publicabout.html"
+  get "/about" $ file "src/public/about.html"
   get "/changes" $ file "src/public/changes.html"
