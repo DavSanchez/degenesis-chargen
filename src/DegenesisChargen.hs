@@ -17,7 +17,7 @@ import Prelude hiding (get)
 runChargenServer :: IO ()
 runChargenServer = scotty 80 $ do
   middleware logStdoutDev
-  middleware $ staticPolicy (addBase "public")
-  get "/" $ file "public/index.html"
-  get "/about" $ file "public/about.html"
-  get "/changes" $ file "public/changes.html"
+  middleware $ staticPolicy (addBase "src/public")
+  get "/" $ file "src/public/index.html"
+  get "/about" $ file "src/publicabout.html"
+  get "/changes" $ file "src/public/changes.html"

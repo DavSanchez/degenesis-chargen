@@ -20,10 +20,12 @@ source-repository head
   type:                git
   location:            https://github.com/DavSanchez/degenesis-chargen.git
   
-data-files: public/*.html
-          , public/css/*.css
-          , public/js/*.js
-          , public/favicon.ico
+-- data-files: public/*.html
+--           , public/css/*.css
+--           , public/js/*.js
+--           , public/favicon.ico
+
+-- data-dir: public
 
 common common-options
   build-depends:       base ^>= 4.14.1.0
@@ -59,6 +61,7 @@ library
                      , wai-extra
                      , wai-middleware-static
   exposed-modules:     DegenesisChargen
+  other-modules:       Paths_degenesis_chargen
 
 executable degenesis-chargen
   import:              common-options
