@@ -16,16 +16,18 @@ extra-doc-files:     README.md
                      CHANGELOG.md
 tested-with:         GHC == 8.10.4
 
+data-files:
+            *.html
+            css/*.css
+            js/*.js
+            favicon.ico
+
+data-dir:
+          public
+
 source-repository head
   type:                git
   location:            https://github.com/DavSanchez/degenesis-chargen.git
-  
-data-files: *.html
-          , css/*.css
-          , js/*.js
-          , favicon.ico
-
-data-dir: public
 
 common common-options
   build-depends:       base ^>= 4.14.1.0
