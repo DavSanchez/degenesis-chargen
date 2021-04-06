@@ -20,12 +20,12 @@ source-repository head
   type:                git
   location:            https://github.com/DavSanchez/degenesis-chargen.git
   
--- data-files: public/*.html
---           , public/css/*.css
---           , public/js/*.js
---           , public/favicon.ico
+data-files: *.html
+          , css/*.css
+          , js/*.js
+          , favicon.ico
 
--- data-dir: public
+data-dir: public
 
 common common-options
   build-depends:       base ^>= 4.14.1.0

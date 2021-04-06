@@ -14,10 +14,17 @@ import Network.Wai.Middleware.Static
 import Web.Scotty
 import Prelude hiding (get)
 
+import Paths_degenesis_chargen
+
 runChargenServer :: IO ()
-runChargenServer = scotty 80 $ do
-  middleware logStdoutDev
-  middleware $ staticPolicy (addBase "src/public")
-  get "/" $ file "src/public/index.html"
-  get "/about" $ file "src/public/about.html"
-  get "/changes" $ file "src/public/changes.html"
+runChargenServer = do
+  ddir <- getDataDir
+  idxH <- getDataFileName "index.html"
+  abtH <- getDataFileName "about.html"
+  chgH <- getDataFileName "changes.html"
+  scotty 8080 $ do
+    middleware logStdoutDev
+    middleware $ staticPolicy (addBase ddir)
+    get "/" $ file idxH
+    get "/about" $ file abtH
+    get "/changes" $ file chgH
