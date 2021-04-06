@@ -16,18 +16,22 @@ extra-doc-files:     README.md
                      CHANGELOG.md
 tested-with:         GHC == 8.10.4
 
+data-files:
+            *.html
+            css/*.css
+            js/*.js
+            favicon.ico
+
+data-dir:
+          public
+
 source-repository head
   type:                git
   location:            https://github.com/DavSanchez/degenesis-chargen.git
-  
-data-files: public/*.html
-          , public/css/*.css
-          , public/js/*.js
-          , public/favicon.ico
 
 common common-options
   build-depends:       base ^>= 4.14.1.0
-                     , relude ^>= 1.0.0.1
+                     , relude ^>= 0.7.0.0
   
   mixins:              base hiding (Prelude)
                      , relude (Relude as Prelude)
@@ -59,6 +63,7 @@ library
                      , wai-extra
                      , wai-middleware-static
   exposed-modules:     DegenesisChargen
+  other-modules:       Paths_degenesis_chargen
 
 executable degenesis-chargen
   import:              common-options
