@@ -22,6 +22,10 @@ runChargenServer = do
   idxH <- getDataFileName "index.html"
   abtH <- getDataFileName "about.html"
   chgH <- getDataFileName "changes.html"
+  putStrLn $ "Data dir: " ++ ddir
+  putStrLn $ "index: " ++ idxH
+  putStrLn $ "about: " ++ abtH
+  putStrLn $ "changes: " ++ chgH
   scotty 8080 $ do
     middleware logStdoutDev
     middleware $ staticPolicy (addBase ddir)
